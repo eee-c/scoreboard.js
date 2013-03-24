@@ -3,13 +3,15 @@ function Scoreboard(options) {
 
   this._message = options.message || '';
   this._score = options.score || 0;
-  this._timer = new __Timer();
-  this._countdown = new __Countdown({
-    duration: options.countDownFrom
-  });
-  this.onTimeExpired(
-    options.onTimeExpired ? options.onTimeExpired : function(){}
-  );
+
+  if (options.onTimeExpired) {
+    this._countdown = new __Countdown({
+      duration: options.countDownFrom
+    });
+    this.onTimeExpired(
+      options.onTimeExpired ? options.onTimeExpired : function(){}
+    );
+  }
 }
 
 /****
@@ -138,6 +140,7 @@ Scoreboard.prototype.hideTimer = function() {
 
 Scoreboard.prototype.setTimer = function() {
   var that = this;
+  if (!this._timer) this._timer = new __Timer();
   this._timer.onUpdate(function(time) {
     that.timer_el.innerHTML = 'Time: ' + time;
   });
@@ -185,6 +188,11 @@ Scoreboard.prototype.hideCountdown = function() {
 
 Scoreboard.prototype.setCountdown = function(duration) {
   var that = this;
+
+  if (!this._countdown) this._countdown = new __Countdown({
+    duration: duration
+  });
+
   if (duration) this._countdown.reset(duration);
   this._countdown.onUpdate(function(time) {
     that.countdown_el.innerHTML = 'Remaining: ' + time;
