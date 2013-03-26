@@ -116,7 +116,16 @@ Scoreboard.prototype.getScore = function() {
 
 Scoreboard.prototype.score = Scoreboard.prototype.setScore;
 
-// Score
+Scoreboard.prototype.addPoints = function(points) {
+  this._score += points;
+};
+
+Scoreboard.prototype.subtractPoints = function(points) {
+  this._score -= points;
+};
+
+
+// Timer
 
 /*****
  * Timer
@@ -326,6 +335,7 @@ __Timer.prototype.last = function() {
 };
 
 __Timer.prototype.stop = function() {
+  if (this._last) return;
   this._last = (new Date).getTime();
 };
 
