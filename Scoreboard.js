@@ -117,11 +117,11 @@ Scoreboard.prototype.getScore = function() {
 Scoreboard.prototype.score = Scoreboard.prototype.setScore;
 
 Scoreboard.prototype.addPoints = function(points) {
-  this._score += points;
+  this.setScore(this._score + points);
 };
 
 Scoreboard.prototype.subtractPoints = function(points) {
-  this._score -= points;
+  this.setScore(this._score - points);
 };
 
 
