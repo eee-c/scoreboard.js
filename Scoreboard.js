@@ -28,7 +28,14 @@ Scoreboard.prototype.hideMessage = function() {
   return this;
 };
 
+Scoreboard.prototype.clearMessage = function() {
+  this.setMessage();
+  return this;
+};
+
 Scoreboard.prototype.setMessage = function(message) {
+  if (!message) message = '';
+
   this.showMessage();
   this._message = message;
   this.message_el.innerHTML = this._message;
