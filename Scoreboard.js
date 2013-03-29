@@ -52,7 +52,7 @@ Scoreboard.prototype.appendMessage = function(message) {
 };
 
 Scoreboard.prototype.addMessage = Scoreboard.prototype.appendMessage;
-Scoreboard.prototype.message = Scoreboard.prototype.appendMessage;
+Scoreboard.prototype.message = Scoreboard.prototype.setMessage;
 
 // Message
 
@@ -110,7 +110,7 @@ Scoreboard.prototype.showScore = function() {
 
 Scoreboard.prototype.setScore = function(score) {
   this.showScore();
-  this._score = score;
+  this._score = score || 0;
 
   this.score_el.innerHTML = "Score: " + this._score;
 
