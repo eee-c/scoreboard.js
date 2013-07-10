@@ -240,7 +240,7 @@ Scoreboard.prototype.onTimeExpired = function(cb) {
     function() { that.setMessage(cb); } : cb;
 
   this._countdown.onTimeExpired(function() {
-    that.stopTimer();
+    that.stopCountdown();
     that._on_time_expired();
   });
 };
