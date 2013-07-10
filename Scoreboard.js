@@ -309,6 +309,7 @@ Scoreboard.prototype.ensureDom = function() {
   var that = this;
   document.addEventListener('keypress', function(event) {
     if (event.keyCode == 63) that.toggleHelp();
+    if (event.keyCode == 47) that.toggleHelp();
   });
 
   document.body.appendChild(el);
