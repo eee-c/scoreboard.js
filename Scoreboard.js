@@ -1,8 +1,11 @@
 function Scoreboard(options) {
   if (!options) options= {};
 
+  if (typeof(options) == 'string') options = {location: options};
+
   this._message = options.message || '';
   this._score = options.score || 0;
+  this._location = options.location || 'topright';
 
   if (options.onTimeExpired) {
     this._countdown = new __Countdown({
@@ -257,10 +260,13 @@ Scoreboard.prototype.ensureDom = function() {
   el.style.opacity = 0.7;
   el.style.borderRadius = "5px";
   el.style.padding = "5px 20px";
-  el.style.right = "50px";
-  el.style.top = "75px";
   el.style.width = (window.innerWidth * 0.2) + "px";
   el.style.minWidth = '200px';
+
+  var pos = this.position();
+  for (var prop in pos) {
+    el.style[prop] = pos[prop];
+  }
 
   el.style.color = 'yellow';
   el.style.fontFamily = 'Arial, San Serif';
@@ -314,6 +320,17 @@ Scoreboard.prototype.ensureDom = function() {
 
   document.body.appendChild(el);
 };
+
+Scoreboard.prototype.position = function() {
+  if (this._location == 'bottomleft')   return { bottom: '75px', left: '50px' };
+  if (this._location == 'bottomright')  return { bottom: '75px', right: '50px' };
+
+  if (this._location == 'topleft')   return { top: '75px', left: '50px' };
+
+  // Default topright
+  return { top: '75px', right: '50px' };
+};
+
 
 /****
  * Timer Class
